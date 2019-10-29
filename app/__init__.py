@@ -11,9 +11,9 @@ import os, sys
 config_name = os.environ.get('ENVIRONMENT')
 
 app = Flask(__name__)
-app.config.from_object(config[config_name])
+app.config.from_object(config.get(config_name))
 
-LOG = app.config['LOG_PATH']
+LOG = app.config.get('LOG_PATH')
 
 if app.config['ENV'] != 'production':
     logging.config.dictConfig(yaml.load(open('conf/logging_dev.conf')))
